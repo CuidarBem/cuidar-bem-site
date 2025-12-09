@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clínica Cuidar Bem – Plano Médico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primaria: #2B484C;        /* Azul Petróleo */
+      --primaria-clara: #E6EFF0;  /* Azul bem claro para fundos */
+      --secundaria: #D86159;      /* Vermelho */
+      --texto: #2B484C;           /* Azul petróleo para textos */
+      --fundo: #FFFFFF;           /* Branco */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #ffffffee;
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    /* LOGO E NOME */
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 40px;   /* ajuste se quiser maior/menor */
+      width: auto;
+    }
+
+    .logo-area span {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primaria);
+      white-space: nowrap;
+    }
+
+    nav a {
+      margin-left: 16px;
+      text-decoration: none;
+      color: var(--texto);
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--secundaria);
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(
+        135deg,
+        var(--primaria-clara),
+        #ffffff
+      );
+      padding: 48px 0 40px;
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primaria);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: var(--primaria-clara);
+      color: var(--primaria);
+      border: 1px solid #c2d3d7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--secundaria);
+      color: #fff;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #b94b45;
+    }
+
+    section {
+      padding: 40px 0 32px;
+    }
+
+    section:nth-of-type(even) {
+      background: #f7fafb;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--primaria);
+    }
+
+    section p {
+      margin-bottom: 8px;
+      font-size: 0.98rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .card {
+      border-radius: 12px;
+      border: 1px solid #dde4e6;
+      padding: 14px 16px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      font-size: 0.95rem;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primaria);
+    }
+
+    /* TABELA REDE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid #d9e1e3;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primaria-clara);
+      color: var(--primaria);
+      font-weight: 600;
+    }
+
+    /* CONTATOS */
+    .contatos-lista p {
+      margin-bottom: 4px;
+    }
+
+    .contatos-lista strong {
+      color: var(--primaria);
+    }
+
+    /* MAPA CENTRALIZADO */
+    .mapa-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .mapa-placeholder,
+    .mapa-container iframe {
+      width: 80%;
+      max-width: 700px;
+      height: 350px;
+      border-radius: 12px;
+      border: 1px solid #c5d1d3;
+      padding: 12px;
+      background: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .mapa-placeholder {
+      font-size: 0.9rem;
+      color: #607d8b;
+    }
+
+    footer {
+      padding: 16px 0;
+      border-top: 1px solid #e0e0e0;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #607d8b;
+    }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 2fr 1.4fr;
+        align-items: center;
+      }
+
+      .hero-title {
+        font-size: 2.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <!-- LOGO + NOME -->
+      <div class="logo-area">
+        <img src="file:///C:/Users/f60648420329/OneDrive%20-%20DIAGNOSTICOS%20DA%20AMERICA%20S.A/%C3%81rea%20de%20Trabalho/Site%20Cuida%20Bem/logo-cuidarbem.jpg.jpg" alt="Logo Cuidar Bem" class="logo-img">
+        <span>Clínica Cuidar Bem</span>
+      </div>
+      <nav>
+        <a href="#plano">Plano médico</a>
+        <a href="#rede">Rede credenciada</a>
+        <a href="#contatos">Contatos</a>
+        <a href="#localizacao">Localização</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO / CAPA -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <h1 class="hero-title">Cuidar da sua saúde, com proximidade e qualidade.</h1>
+        <p class="hero-subtitle">
+          A Clínica Cuidar Bem é a sua porta de entrada para o cuidado
+          integral, com equipe multiprofissional e acompanhamento contínuo
+          da sua saúde e da sua família.
+        </p>
+        <a class="btn" href="#plano">Conheça o plano médico</a>
+        <div class="hero-highlights">
+          <span class="pill">Atenção Primária à Saúde</span>
+          <span class="pill">Médico de Família e Comunidade</span>
+          <span class="pill">Equipe multiprofissional</span>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <strong>Informações rápidas</strong>
+          <p><strong>Endereço:</strong>
+            <!-- Substitua pelo endereço da clínica -->
+            R. São Judas Tadeu, SN - Cantinho do Céu, São Luís - MA, 65052-050
+          </p>
+          <p><strong>Recepção:</strong> (98) 99107-9736</p>
+          <p><strong>Autorização:</strong> (98) 99191-4932</p>
+          <p><strong>Administrativo:</strong> (98) 998407-0874</p>
+          <p style="margin-top: 6px; font-size: 0.85rem;">
+            Horário de funcionamento: Seg a Sex, 7h às 19h.
+            <!-- ajuste conforme sua realidade -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO PLANO MÉDICO -->
+  <section id="plano">
+    <div class="container">
+      <h2>Sobre o plano médico Cuidar Bem</h2>
+      <p>
+        O plano médico da Clínica Cuidar Bem foi estruturado para oferecer
+        acompanhamento contínuo, foco em prevenção e acesso facilitado à
+        rede credenciada, com o Médico de Família como coordenador do cuidado.
+      </p>
+      <ul style="margin-left: 18px; margin-top: 8px; font-size: 0.95rem;">
+        <li>Acompanhamento com Médico de Família e Comunidade</li>
+        <li>Equipe multiprofissional (ex.: enfermagem, psicologia, nutrição, etc.)</li>
+        <li>Encaminhamento organizado para especialistas quando necessário</li>
+        <li>Foco em prevenção, controle de doenças crônicas e promoção da saúde</li>
+      </ul>
+
+      <!-- Botão para cartilha do plano médico -->
+      <div style="margin-top: 16px;">
+        <!-- Substitua o # pelo link da cartilha em PDF (OneDrive, site do HSD, etc.) -->
+        <a class="btn" href="file:///C:/Users/f60648420329/OneDrive%20-%20DIAGNOSTICOS%20DA%20AMERICA%20S.A/%C3%81rea%20de%20Trabalho/Site%20Cuida%20Bem/cartilha-cuidarbem.pdf.pdf">
+          Ver cartilha completa do plano
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO REDE CREDENCIADA -->
+  <section id="rede">
+    <div class="container">
+      <h2>Rede credenciada</h2>
+      <p>
+        Confira abaixo a rede credenciada do plano, com as principais
+        especialidades e médicos disponíveis para atendimento.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <td>Médico de Família e Comunidade</td>
+            <td>Dra. Larissa Bordalo</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>          
+          <tr>
+	    <td>Médico de Família e Comunidade</td>
+            <td>Dra. Rosana Maria</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          <tr>
+	    <td>Médico de Família e Comunidade</td>
+            <td>Dra. Gabriela Barreira</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          <tr>
+	    <td>Médico de Família e Comunidade</td>
+            <td>Dr. Vitor Fontes</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          <tr>
+	    <td>Médico de Família e Comunidade</td>
+            <td>Dr. Marcelo Bonates</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          <tr>
+            <td>Psicologia</td>
+            <td>Ana Paula</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          <tr>
+            <td>Psicologia</td>
+            <td>Leticia Pestana</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          </tr>
+            <td>Nutrição</td>
+            <td>Rosione Sobrinho</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          </tr>          
+            <td>Fisioterapia</td>
+            <td>Fabiana Anchieta</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          </tr>
+            <td>Fisioterapia</td>
+            <td>Cristina Ananias</td>
+            <td>Clínica Cuidar Bem</td>
+            <td>Atendimento agendado via recepção e Central de Atendimento</td>
+          </tr>
+          <!--
+            DICA:
+            Copie e cole as linhas acima e substitua conforme a sua rede credenciada:
+            - Especialidade
+            - Nome do médico
+            - Local de atendimento
+            - Alguma observação importante
+          -->
+        </tbody>
+      </table>
+
+      <p style="margin-top: 8px; font-size: 0.85rem;">
+        *Para informações completas e atualizadas da rede credenciada, consulte a cartilha do plano
+        ou entre em contato com a recepção.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEÇÃO CONTATOS -->
+  <section id="contatos">
+    <div class="container">
+      <h2>Canais de atendimento</h2>
+      <p>Em caso de dúvidas, agendamentos ou autorizações, fale com a nossa equipe:</p>
+      <div class="cards">
+        <div class="card">
+          <strong>Recepção / Agendamentos</strong>
+          <p>Telefone: (98) 3216-8100</p>
+          <p>WhatsApp: (98) 99109-9736</p>
+          <p>E-mail: gestaocuidarbem@dasa.com.br</p>
+        </div>
+        <div class="card">
+          <strong>Autorizações</strong>
+          <p>Telefone: (98) 99191-4932</p>
+          <p>E-mail: gestaocuidarbem@dasa.com.br</p>
+        </div>
+        <div class="card">
+          <strong>Administrativo do plano</strong>
+          <p>Telefone: (98) 98407-0874</p>
+          <p>E-mail: gestaocuidarbem@dasa.com.br</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO LOCALIZAÇÃO -->
+  <section id="localizacao">
+    <div class="container">
+      <h2>Localização</h2>
+      <p>
+        <!-- Substitua pelo endereço oficial da clínica -->
+        <strong>Endereço:</strong> R. São Judas Tadeu, SN - Cantinho do Céu, São Luís - MA, 65052-050
+      </p>
+      <p>
+        <!-- Ajuste o texto de acordo com a realidade -->
+        A clínica está localizada dentro do estacionamento dos Colaboradores do Hospital São Domingos (Ao lado do banco Santader).
+      </p>
+
+      <!-- MAPA CENTRALIZADO -->
+      <div class="mapa-container">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.9538495477677!2d-44.24617962626318!3d-2.521977138222659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7f69138fbd87273%3A0xdc9e27c332b1547e!2sColaboradores%20HSD!5e0!3m2!1spt-BR!2sbr!4v1765309441959!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Quando tiver o código do Google Maps, substitua TODO este div interno pelo <iframe> -->
+        <div class="mapa-placeholder">
+  </section>
+
+  <footer>
+    <div class="container">
+      Clínica Cuidar Bem – Plano Médico | Este site tem caráter informativo e não substitui as orientações assistenciais.
+    </div>
+  </footer>
+</body>
+</html>
+
